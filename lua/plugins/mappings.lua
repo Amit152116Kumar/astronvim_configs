@@ -27,12 +27,48 @@ return {
             desc = "Close buffer from tabline",
           },
 
+          -- Move cursor between visual lines
+          ["k"] = { "v:count == 0 ? 'gk' : 'k'", expr = true, silent = true },
+          ["j"] = { "v:count == 0 ? 'gj' : 'j'", expr = true, silent = true },
+
+          -- Rename the current file
+          -- ["<leader>rn"] = { ":saveas ", desc = "Rename current file" },
+
+          -- Save all files
+          -- ["<leader>W"] = { "<cmd>w<CR>", desc = "Save All Files" },
+
           -- tables with just a `desc` key will be registered with which-key if it's installed
           -- this is useful for naming menus
           -- ["<Leader>b"] = { desc = "Buffers" },
 
           -- setting a mapping to false will disable it
           -- ["<C-S>"] = false,
+        },
+        -- Visual mode mappings
+        v = {
+          -- Move selected lines up or down
+          ["J"] = { ":m '>+1<CR>gv=gv", desc = "Move Current Line Down", noremap = true, silent = true },
+          ["K"] = { ":m '<-2<CR>gv=gv", desc = "Move Current Line Up", noremap = true, silent = true },
+
+          -- Search for visually selected text literally
+          ["/"] = {
+            function()
+              -- Yank the visually selected text into the default register
+              vim.cmd 'normal! "vy'
+              -- Get the yanked text from the default register
+              local selected_text = vim.fn.getreg '"'
+              -- Escape special characters for literal searching
+              local escaped_text = vim.fn.escape(selected_text, "/\\")
+              -- Set the search register for literal searching
+              vim.fn.setreg("/", "\\V" .. escaped_text)
+              -- Trigger the search for the next occurrence
+              vim.cmd "normal! n"
+            end,
+            desc = "Search for visually selected text literally",
+          },
+
+          -- Replace and keep yank
+          ["<leader>p"] = { '"_dP', desc = "Replace and keep yank" },
         },
       },
     },
