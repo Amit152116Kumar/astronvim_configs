@@ -32,6 +32,12 @@ return {
         spell = false, -- sets vim.opt.spell
         signcolumn = "yes", -- sets vim.opt.signcolumn to yes
         wrap = false, -- sets vim.opt.wrap
+        scrolloff = 10,
+        colorcolumn = "80",
+        undodir = os.getenv "HOME" .. "/.vim/undodir",
+        undofile = true,
+        ignorecase = true,
+        smartcase = true,
       },
       g = { -- vim.g.<key>
         -- configure global vim variables (vim.g)

@@ -15,7 +15,7 @@ return {
       codelens = true, -- enable/disable codelens refresh on start
       inlay_hints = false, -- enable/disable inlay hints on start
       semantic_tokens = true, -- enable/disable semantic token highlighting
-      -- signature_help = true,
+      signature_help = true,
     },
     -- customize lsp formatting options
     formatting = {
@@ -46,6 +46,12 @@ return {
     ---@diagnostic disable: missing-fields
     config = {
       -- clangd = { capabilities = { offsetEncoding = "utf-8" } },
+      gopls = {
+        settings = {
+          usePlaceholders = false,
+          completeUnimported = true,
+        },
+      },
     },
     -- customize how language servers are attached
     handlers = {

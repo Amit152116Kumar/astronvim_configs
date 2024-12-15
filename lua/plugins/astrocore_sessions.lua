@@ -15,17 +15,17 @@ return {
   opts = {
     sessions = {
       -- disable the auto-saving of directory sessions
-      autosave = { cwd = false },
+      autosave = { cwd = true },
     },
     mappings = {
       n = {
         -- update save dirsession mapping to get the correct session name
-        ["<Leader>SS"] = {
+        ["<Leader>ss"] = {
           function() require("resession").save(get_session_name(), { dir = "dirsession" }) end,
           desc = "Save this dirsession",
         },
         -- update load dirsession mapping to get the correct session name
-        ["<Leader>S."] = {
+        ["<Leader>s."] = {
           function() require("resession").load(get_session_name(), { dir = "dirsession" }) end,
           desc = "Load current dirsession",
         },

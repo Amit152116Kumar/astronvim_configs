@@ -1,5 +1,5 @@
 -- if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
-
+local neovim_config_dir = vim.fn.stdpath "config_dirs"
 return {
   {
     -- AstroCore provides a central place to modify mappings, vim options, autocommands, and more!
@@ -31,18 +31,22 @@ return {
           ["k"] = { "v:count == 0 ? 'gk' : 'k'", expr = true, silent = true },
           ["j"] = { "v:count == 0 ? 'gj' : 'j'", expr = true, silent = true },
 
+          -- Keeps the cursor in the middle when search next or prev term
+          ["n"] = { "nzzzv", silent = true },
+          ["N"] = { "Nzzzv", silent = true },
           -- Rename the current file
           -- ["<leader>rn"] = { ":saveas ", desc = "Rename current file" },
 
           -- Save all files
           -- ["<leader>W"] = { "<cmd>w<CR>", desc = "Save All Files" },
 
-          -- tables with just a `desc` key will be registered with which-key if it's installed
-          -- this is useful for naming menus
-          -- ["<Leader>b"] = { desc = "Buffers" },
-
           -- setting a mapping to false will disable it
           -- ["<C-S>"] = false,
+        },
+        -- All Visual Mode
+        x = {
+          -- Replace and keep yank
+          ["<Leader>p"] = { '"_dP', desc = "Replace and keep yank" },
         },
         -- Visual mode mappings
         v = {
@@ -66,9 +70,6 @@ return {
             end,
             desc = "Search for visually selected text literally",
           },
-
-          -- Replace and keep yank
-          ["<leader>p"] = { '"_dP', desc = "Replace and keep yank" },
         },
       },
     },
@@ -93,6 +94,18 @@ return {
             cond = function(client)
               return client.supports_method "textDocument/semanticTokens/full" and vim.lsp.semantic_tokens ~= nil
             end,
+          },
+          ["grr"] = {
+            function() require("vim.lsp.buf").references() end,
+            desc = "vim.lsp.buf.references()",
+          },
+          ["gs"] = {
+            function() require("telescope.builtin").lsp_document_symbols() end,
+            desc = "Search Document Symbols",
+          },
+          ["grw"] = {
+            function() require("telescope.builtin").lsp_workspace_symbols() end,
+            desc = "Search WorkSpace Symbols",
           },
         },
       },

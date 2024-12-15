@@ -15,7 +15,6 @@ return {
         "clangd",
         "pyright",
         "gopls",
-        "ast_grep",
       },
     },
   },
