@@ -107,6 +107,20 @@ return {
             function() require("telescope.builtin").lsp_workspace_symbols() end,
             desc = "Search WorkSpace Symbols",
           },
+          ["<Tab>"] = {
+            function() require("plugins.custom_treesitter").go_to_next_node() end,
+          },
+          ["<S-Tab>"] = {
+            function() require("plugins.custom_treesitter").go_to_prev_node() end,
+          },
+        },
+        x = {
+          -- ["<Tab>"] = {
+          --   function() require("plugins.custom_treesitter").go_to_next_node() end,
+          -- },
+          -- ["<S-Tab>"] = {
+          --   function() require("plugins.custom_treesitter").go_to_prev_node() end,
+          -- },
         },
       },
     },
