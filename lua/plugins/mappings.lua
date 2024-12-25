@@ -108,10 +108,10 @@ return {
             desc = "Search WorkSpace Symbols",
           },
           ["<Tab>"] = {
-            function() require("plugins.custom_treesitter").go_to_next_node() end,
+            function() require("myPlugins.custom_treesitter").go_to_next_node() end,
           },
           ["<S-Tab>"] = {
-            function() require("plugins.custom_treesitter").go_to_prev_node() end,
+            function() require("myPlugins.custom_treesitter").go_to_prev_node() end,
           },
         },
         x = {

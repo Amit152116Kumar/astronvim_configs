@@ -1,7 +1,7 @@
 local ts = vim.treesitter
 local M = {}
 
-function M.load_cursor_tree(cursor_node, isNext)
+local function load_cursor_tree(cursor_node, isNext)
   local detail = ""
   if cursor_node then
     local type = cursor_node:type()
