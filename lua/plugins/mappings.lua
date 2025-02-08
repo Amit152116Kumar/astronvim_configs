@@ -34,6 +34,31 @@ return {
                     -- Keeps the cursor in the middle when search next or prev term
                     ["n"] = { "nzzzv", silent = true },
                     ["N"] = { "Nzzzv", silent = true },
+
+                    -- TreeSitter Node navigation
+                    ["<Tab>"] = {
+                        function() require("myPlugins.custom_treesitter").go_to_next_node() end,
+                        desc = "Go to next TreeSitter node",
+                    },
+                    ["<S-Tab>"] = {
+                        function() require("myPlugins.custom_treesitter").go_to_prev_node() end,
+                        desc = "Go to previous TreeSitter node",
+                    },
+
+                    -- Save new file
+                    ["<Leader>fd"] = {
+                        function() require("myPlugins.save_new_file").SaveFile() end,
+                        desc = "Find Directories",
+                    },
+
+                    ["<Leader>o"] = {
+                        "<C-w>w",
+                        desc = "Switch window",
+                    },
+                    ["<Leader>v"] = {
+                        "<C-w>v",
+                        desc = "Split window vertically",
+                    },
                     -- Rename the current file
                     -- ["<leader>rn"] = { ":saveas ", desc = "Rename current file" },
 
@@ -107,14 +132,6 @@ return {
                     ["grw"] = {
                         function() require("telescope.builtin").lsp_workspace_symbols() end,
                         desc = "Search WorkSpace Symbols",
-                    },
-                    ["<Tab>"] = {
-                        function() require("myPlugins.custom_treesitter").go_to_next_node() end,
-                        desc = "Go to next TreeSitter node",
-                    },
-                    ["<S-Tab>"] = {
-                        function() require("myPlugins.custom_treesitter").go_to_prev_node() end,
-                        desc = "Go to previous TreeSitter node",
                     },
                 },
                 x = {
