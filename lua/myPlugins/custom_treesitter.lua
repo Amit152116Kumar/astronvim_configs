@@ -1,48 +1,4 @@
-local ts = vim.treesitter
 local M = {}
-
-local function load_cursor_tree(cursor_node, isNext)
-    local detail = ""
-    if cursor_node then
-        local type = cursor_node:type()
-        local node_text = ts.get_node_text(cursor_node, 0)
-        detail = detail .. "Cursor Node Type: " .. type
-        detail = detail .. "\nCursor Node Text:" .. node_text
-
-        if type == node_text then detail = detail .. "\nEqual" end
-        local parent = cursor_node:parent()
-        if parent then
-            print()
-            detail = detail .. "\nParent Node Type:" .. parent:type()
-        end
-    end
-    detail = detail .. "\n"
-    if isNext then
-        local next_node = cursor_node:next_named_sibling()
-        if next_node then
-            detail = detail .. "\nNext Node Type: " .. next_node:type()
-            detail = detail .. "\nCursor Node Text:" .. ts.get_node_text(next_node, 0)
-            local parent = next_node:parent()
-            if parent then
-                print()
-                detail = detail .. "\nParent Node Type:" .. parent:type()
-            end
-        end
-    else
-        local prev_node = cursor_node:prev_named_sibling()
-        if prev_node then
-            detail = detail .. "\nPrev Node Type: " .. prev_node:type()
-            detail = detail .. "\nCursor Node Text:" .. ts.get_node_text(prev_node, 0)
-            local parent = prev_node:parent()
-            if parent then
-                print()
-                detail = detail .. "\nParent Node Type:" .. parent:type()
-            end
-        end
-    end
-
-    show_custom_notification(detail)
-end
 
 -- Function to move to the next TreeSitter node
 function M.go_to_next_node()
@@ -130,10 +86,5 @@ function M.go_to_prev_node()
         print "No previous node found"
     end
 end
-
-local astro_notify = require "astronvim.notify"
-
--- Function to show a custom print statement as a notification
-function show_custom_notification(message) astro_notify.notify(message, "info", { title = "Custom Notification" }) end
 
 return M

@@ -1,5 +1,3 @@
--- if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
-
 -- AstroLSP allows you to customize the features in AstroNvim's LSP configuration engine
 -- Configuration documentation can be found with `:h astrolsp`
 -- NOTE: We highly recommend setting up the Lua Language Server (`:LspInstall lua_ls`)
@@ -13,9 +11,10 @@ return {
         -- Configuration table of features provided by AstroLSP
         features = {
             codelens = true, -- enable/disable codelens refresh on start
-            inlay_hints = false, -- enable/disable inlay hints on start
+            inlay_hints = true, -- enable/disable inlay hints on start
             semantic_tokens = true, -- enable/disable semantic token highlighting
             signature_help = true,
+            code_actions = true,
         },
         -- customize lsp formatting options
         formatting = {
@@ -40,12 +39,29 @@ return {
         },
         -- enable servers that you already have installed without mason
         servers = {
-            -- "pyright"
+            -- "pyright",
         },
         -- customize language server configuration options passed to `lspconfig`
         ---@diagnostic disable: missing-fields
         config = {
-            -- clangd = { capabilities = { offsetEncoding = "utf-8" } },
+            clangd = {
+                capabilities = {
+                    semanticTokens = {
+                        enable = true,
+                        full = true,
+                    },
+                },
+                cmd = {
+                    "clangd",
+                    "--compile-commands-dir=build", -- Adjust if your build directory is elsewhere
+                    "--background-index", -- Enable background indexing for responsive navigation
+                    "--header-insertion=never", -- Disable automatic header insertion if not desired
+                    "--all-scopes-completion", -- Improve completion suggestions across scopes
+                    "--pch-storage=memory", -- Store precompiled headers in memory for speed
+                    "--clang-tidy", -- Optionally enable clang-tidy diagnostics
+                    "--completion-style=detailed", -- More detailed completion output
+                },
+            },
             gopls = {
                 settings = {
                     usePlaceholders = false,

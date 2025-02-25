@@ -46,18 +46,14 @@ return {
                     },
 
                     -- Save new file
-                    ["<Leader>fd"] = {
+                    ["<Leader>sf"] = {
                         function() require("myPlugins.save_new_file").SaveFile() end,
-                        desc = "Find Directories",
+                        desc = "Save File",
                     },
 
                     ["<Leader>o"] = {
                         "<C-w>w",
                         desc = "Switch window",
-                    },
-                    ["<Leader>v"] = {
-                        "<C-w>v",
-                        desc = "Split window vertically",
                     },
                     -- Rename the current file
                     -- ["<leader>rn"] = { ":saveas ", desc = "Rename current file" },
@@ -121,15 +117,15 @@ return {
                                 and vim.lsp.semantic_tokens ~= nil
                         end,
                     },
-                    ["grr"] = {
+                    grr = {
                         function() require("vim.lsp.buf").references() end,
                         desc = "vim.lsp.buf.references()",
                     },
-                    ["gs"] = {
+                    gs = {
                         function() require("telescope.builtin").lsp_document_symbols() end,
                         desc = "Search Document Symbols",
                     },
-                    ["grw"] = {
+                    grw = {
                         function() require("telescope.builtin").lsp_workspace_symbols() end,
                         desc = "Search WorkSpace Symbols",
                     },

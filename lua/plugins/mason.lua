@@ -1,5 +1,3 @@
--- if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
-
 -- Customize Mason plugins
 
 ---@type LazySpec
@@ -45,7 +43,6 @@ return {
                 "codelldb", -- Debugging support for C++
                 "delve", -- Debugging support for Go
                 "cpptools",
-                "dart-debug-adapter",
                 "debugpy",
             },
         },
